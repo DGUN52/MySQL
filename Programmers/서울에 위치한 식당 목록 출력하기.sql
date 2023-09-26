@@ -1,22 +1,21 @@
--- 코드를 입력하세요
 SELECT 
-    a.rest_id
-    , rest_name
-    , food_type
-    , favorites
-    , address
-    , round(b.score,2) avg
-from 
-    rest_info a
+    INFO.REST_ID
+    , INFO.REST_NAME
+    , INFO.FOOD_TYPE
+    , INFO.FAVORITES
+    , INFO.ADDRESS
+    , SCORE_BY_REST.SCORE
+FROM
+    REST_INFO INFO
     , (
-        select rest_id, avg(review_score) score 
-        from rest_review 
-        group by rest_id
-    ) b
-where 
-    a.rest_id = b.rest_id
-    and address like "서울%"
-order by 
-    avg desc
-    , favorites desc
+        SELECT REST_ID, ROUND(AVG(REVIEW_SCORE),2) SCORE 
+        FROM REST_REVIEW
+        GROUP BY REST_ID
+    ) SCORE_BY_REST
+WHERE 
+    INFO.REST_ID = SCORE_BY_REST.REST_ID
+    and ADDRESS LIKE '서울%'
+ORDER BY
+    SCORE_BY_REST.SCORE DESC
+    , INFO.FAVORITES DESC
 ;
