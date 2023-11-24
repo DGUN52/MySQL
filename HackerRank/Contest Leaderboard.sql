@@ -1,3 +1,4 @@
+# https://velog.io/@deaf52/HackerRank-SQL%EB%AC%B8%EC%A0%9C%ED%92%80%EC%9D%B4-lv.4-Challenges
 select 
     hacker_id
     , name
